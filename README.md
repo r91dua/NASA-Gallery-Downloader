@@ -30,13 +30,3 @@ nasa_downloads/
 4. Go to **Actions**.
 5. Select **Download NASA Gallery Media**.
 6. Click **Run workflow**.
-
-## Why this version fixes the earlier error
-
-Your previous workflow failed because one direct `~large.jpg` URL returned `403 Forbidden`.
-This version:
-- Uses NASA detail page download links first.
-- Falls back to NASA asset API and direct CDN guesses.
-- Logs failed items in `nasa_downloads/_download_manifest.json`.
-- Does not fail the whole job for one bad item.
-- Still commits all successfully downloaded files.
