@@ -1,0 +1,4 @@
+# One NASA gallery URL per line
+# The workflow will scan paginated pages automatically.
+https://www.nasa.gov/gallery/lunar-flyby/
+https://www.nasa.gov/gallery/journey-to-the-moon/
