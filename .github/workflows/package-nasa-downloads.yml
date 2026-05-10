@@ -1,0 +1,39 @@
+name: Package NASA Downloads
+
+on:
+  workflow_dispatch:
+
+jobs:
+  package-downloads:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Verify NASA downloads folder exists
+        run: |
+          if [ ! -d "nasa_downloads" ]; then
+            echo "ERROR: nasa_downloads folder does not exist."
+            echo "Run the Download NASA Gallery Media workflow first."
+            exit 1
+          fi
+
+          echo "NASA downloads folder found."
+          echo "File count:"
+          find nasa_downloads -type f | wc -l
+
+          echo ""
+          echo "Folder sizes:"
+          du -h -d 2 nasa_downloads || true
+
+      - name: Create ZIP file
+        run: |
+          zip -r nasa_downloads.zip nasa_downloads
+
+      - name: Upload ZIP as downloadable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nasa-downloads
+          path: nasa_downloads.zip
+          retention-days: 7
